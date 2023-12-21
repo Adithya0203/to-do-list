@@ -11,7 +11,6 @@ body {
 }
 
 .bg1{
-    align-items: center;
     background-image: url("./assets/images/bg-desktop-dark.jpg");
     position: absolute;
     top: 0%;
@@ -30,12 +29,8 @@ body {
     background-color: #161A30;
 }
 
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #fff;
-    /* background-image: url("./assets/images/bg-desktop-dark.jpg"); */
+@media(max-width:768px){
+    .bg1{
+        background-image: url("./assets/images/bg-mobile-dark.jpg");
+    }
 }
