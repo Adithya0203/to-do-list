@@ -6,17 +6,6 @@ import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const ToDoItem = (props) => {
-    // const draggedNote = useRef(0)
-    // const draggedOverNote = useRef(0)
-
-    // function handleSort(){
-    //     const noteItem = props.notes
-    //     const notes1 = [...noteItem]
-    //     const temp = notes1[draggedNote.current]
-    //     notes1[draggedNote.current] = notes1[draggedOverNote.current]
-    //     notes1[draggedOverNote.current] = temp
-    //     props.noteset(noteItem)
-    // }
     const [isChecked, setChecked] = useState(false);
   
     const handleCheckboxChange = () => {
@@ -25,12 +14,13 @@ const ToDoItem = (props) => {
 
     return (
         <div className="note"
-            // draggable
-            // onDragStart={()=> (draggedNote.current = props.index)}
-            // onDragEnter={()=>(draggedOverNote.current = props.index)}
-            // onDragEnd={handleSort}
-            // onDragOver={(e) => e.preventDefault()}
-            style={{textDecoration: isChecked ? "line-through" : "none",textTransform:"uppercase"}}
+            style={{
+                textDecoration: isChecked ? "line-through" : "none",
+                color:props.check ? "#444444" : "ivory",
+                backgroundColor:props.check ? "ivory" : "#444444",
+                textTransform:"uppercase",
+                
+            }}
         >
             <Checkbox 
                 icon={<RadioButtonUncheckedIcon/>}

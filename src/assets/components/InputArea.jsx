@@ -31,15 +31,15 @@ const InputArea = (props) => {
                 }}
                 inputProps={{
                     style: {
-                        color: 'white',
+                        color: props.check ? "black" : "white",
                         '&::placeholder': {
-                            color: '#fafafa',
+                            color: props.check ? 'black': "fafafa",
                             opcaity: 1,
                         },
                     },
                 }}
                 placeholder="Create a new todo..."
-                sx={{ backgroundColor: "#444444", margin: "0", color: "white" }}
+                sx={{ backgroundColor: props.bg, margin: "0", color: "white" }}
                 onChange={handleChange}
                 value={note}
             />
