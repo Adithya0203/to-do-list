@@ -18,10 +18,6 @@ body {
     width: 100%;
     height: 40%;
     background-size: cover;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    z-index: -1;
 }
 
 .bg2{
@@ -30,18 +26,7 @@ body {
     left: 0;
     width: 100%;
     height: 60%;
-    background-color: #0F2167;
-    z-index: -1;
-}
-
-.note{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #444444;
-    width: 17em;
-    padding: 0.2em 0;
-    color: ivory;
+    background-color: #161A30;
 }
 
 @media(max-width:768px){
