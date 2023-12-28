@@ -12,7 +12,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 function App() {
   const[items,setItems] = useState([])
-  const [isChecked, setChecked] = useState(true);
+  const [isChecked, setChecked] = useState(false);
   
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div>
-      <div className="bg1" style={{backgroundImage:isChecked ? 'url("./src/images/bg-desktop-light.jpg")' : 'url("./src/images/bg-desktop-dark.jpg")'}}></div>
+      <div className="bg1" style={{backgroundImage:isChecked ? 'url("./src/assets/images/bg-desktop-light.jpg")' : 'url("./src/assets/images/bg-desktop-dark.jpg")'}}></div>
       <div className="bg2" style={{backgroundColor:isChecked ? "aliceblue" : "#161A30"}}>
       </div>
       <Grid display="flex" justifyContent="center" alignItems="center" height="100dvh" flexDirection="column">
