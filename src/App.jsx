@@ -2,8 +2,8 @@ import { useState } from 'react'
 import "./App.css"
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import InputArea from './assets/components/InputArea';
-import ToDoItem from './assets/components/ToDoItem'
+import InputArea from './components/InputArea';
+import ToDoItem from './components/ToDoItem'
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
