@@ -1,59 +1,47 @@
 import { useState } from 'react'
 import "./App.css"
-import Card from '@mui/material/Card'
+import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import Checkbox from '@mui/material/Checkbox';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel';
-import Typography from '@mui/material/Typography';
+import InputArea from './assets/components/InputArea';
+import ToDoItem from './assets/components/ToDoItem'
 
 function App() {
-  const [isChecked, setChecked] = useState(false);
+  const[items,setItems] = useState([])
 
-  const handleCheckboxChange = () => {
-    setChecked(!isChecked);
-  };
+  function addNote(note){
+    setItems((prevItems) => {
+      return [...prevItems, note];
+    });
+  }
+
+  function deleteNote(id){
+    setItems((prevItems) => {
+      return prevItems.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
 
   return (
-    <div className="app">
-      <div className="bg1"> </div>
-      
-      <div className="bg2"> </div>
-      
-      <div className="content">
-        <Grid display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100dvh" color="white">
-            <Typography variant="body1">
-              body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-              blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,
-              neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
-              quasi quidem quibusdam.
-            </Typography>
-          <Card raised>
-            <TextField
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton edge="end" aria-label="search">
-                      <AddOutlinedIcon fontSize='large' color='secondary'/>
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="Create a new todo..."
-              InputLabelProps={{
-                children: <span style={{color:'white',fontWeight:"900"}}>Create a new todo...</span>,
-              }}
-              sx={{backgroundColor:"#9DB2BF",margin:"0"}}
-            />
-          </Card>
-        </Grid>
-      </div>
+    <div>
+      <div className="bg1"></div>
+      <div className="bg2"></div>
+      <Grid display="flex" justifyContent="center" alignItems="center" height="100dvh" flexDirection="column">
+        <Paper elevation={24}>
+          <InputArea add={addNote} />
+        </Paper>
+        <br />
+        <Paper elevation={24}>
+            {items.map((todoitem,index)=>(
+              <ToDoItem
+                key={index}
+                id={index}
+                text={todoitem}
+                delete={deleteNote}
+              />
+            ))}
+        </Paper>
+      </Grid>
     </div>
   )
 }
