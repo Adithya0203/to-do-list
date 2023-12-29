@@ -1,5 +1,10 @@
 # ToDoList App
 
+
+ A challenge by [Frontend Mentor](https://www.frontendmentor.io/home) , coded using React
+
+
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
@@ -46,8 +51,20 @@ Make sure you have the following installed on your system:
 1. Start the application:
 
 ```bash
-npm start
+npm run dev
 ```
 2. Open your web browser and go to http://localhost:3000. (port may differ)
 
 3. Use the application to manage your tasks.
+
+## Contributing
+
+Contributions are always welcome!
+
+Contributions are welcome! If you'd like to contribute to the project, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive messages.
+4. Push your changes to your fork.
+5. Submit a pull request to the main repository.
