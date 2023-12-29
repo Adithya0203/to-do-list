@@ -51,7 +51,7 @@ Make sure you have the following installed on your system:
 1. Start the application:
 
 ```bash
-npm start
+npm run dev
 ```
 2. Open your web browser and go to http://localhost:3000. (port may differ)
 
