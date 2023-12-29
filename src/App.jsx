@@ -9,17 +9,21 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+// import dImg from "../public/bg-desktop-dark.jpg"
+// import lImg from "../src/assets/images/bg-desktop-light.jpg"
 
 function App() {
   const[items,setItems] = useState([])
-  const [isChecked, setChecked] = useState(false);
+  const [isChecked, setChecked] = useState(false)
+  const [isLight,setLight] = useState(false)
   
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
+    setLight(!isLight);
   };
 
-  // const dImg = 'url("./assets/images/bg-desktop-dark.jpg")'
-  // const lImg = 'url("./assets/images/bg-desktop-light.jpg")'
+  // const dImg = 'url("./src/assets/images/bg-desktop-dark.jpg")'
+  // const lImg = 'url("./src/assets/images/bg-desktop-light.jpg")'
 
   function addNote(note){
     setItems((prevItems) => {
@@ -37,7 +41,7 @@ function App() {
 
   return (
     <div>
-      <div className="bg1" style={{backgroundImage:isChecked ? 'url("./src/assets/images/bg-desktop-light.jpg")' : 'url("./src/assets/images/bg-desktop-dark.jpg")'}}></div>
+      <div className="bg1" style={{backgroundImage:isLight ? 'url(images/bg-desktop-light.jpg)' : 'url(images/bg-desktop-dark.jpg)'}}></div>
       <div className="bg2" style={{backgroundColor:isChecked ? "aliceblue" : "#161A30"}}>
       </div>
       <Grid display="flex" justifyContent="center" alignItems="center" height="100dvh" flexDirection="column">
