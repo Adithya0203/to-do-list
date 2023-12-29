@@ -1,6 +1,9 @@
 # ToDoList App
 
-A Challenge by [Frontend Mentor]("https://www.frontendmentor.io/home") , coded using Vite + React and Material UI
+
+ A challenge by [Frontend Mentor](https://www.frontendmentor.io/home) , coded using React
+
+
 
 ## Table of Contents
 - [Introduction](#introduction)
