@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .app{
@@ -19,6 +19,7 @@ body {
     height: 40%;
     background-size: cover;
     z-index: -1;
+    background-position: top;
 }
 
 .bg2{
@@ -30,7 +31,7 @@ body {
     z-index: -1;
 }
 
-.note{
+/* .note{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,7 +47,7 @@ body {
     justify-content: space-between;
     width: 17em;
     margin: 1em 0;
-}
+} */
 
 @media(max-width:768px){
     .note{

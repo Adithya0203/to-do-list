@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import Checkbox from '@mui/material/Checkbox';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import { IconButton } from '@mui/material';
+import { Grid, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const ToDoItem = (props) => {
@@ -13,13 +13,12 @@ const ToDoItem = (props) => {
     };  
 
     return (
-        <div className="note"
+        <Grid container justifyContent="space-between" alignItems="center" direction="row" width="17em"
             style={{
                 textDecoration: isChecked ? "line-through" : "none",
                 color:props.check ? "#444444" : "ivory",
                 backgroundColor:props.check ? "ivory" : "#444444",
                 textTransform:"uppercase",
-                
             }}
         >
             <Checkbox 
@@ -32,7 +31,7 @@ const ToDoItem = (props) => {
             }}>
                 <CloseIcon/>
             </IconButton>
-        </div>
+        </Grid>
     )
 }
 
