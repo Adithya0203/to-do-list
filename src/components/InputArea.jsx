@@ -13,22 +13,16 @@ const InputArea = (props) => {
         setNote(newVal)
     }
 
+    function handleKeyPress(event){
+        if (event.key == "Enter"){
+            props.add(note);
+            setNote("");
+        }
+    }
+
     return (
         <div>
             <TextField
-                InputProps={{
-                    endAdornment: (
-                    <InputAdornment position="end">
-                        <IconButton edge="end" aria-label="add"
-                        onClick={() => {
-                            props.add(note);
-                            setNote("");
-                        }}>
-                            <AddOutlinedIcon fontSize="large" color="secondary" />
-                        </IconButton>
-                    </InputAdornment>
-                    ),
-                }}
                 inputProps={{
                     style: {
                         color: props.check ? "black" : "white",
@@ -42,6 +36,7 @@ const InputArea = (props) => {
                 sx={{ backgroundColor: props.bg, margin: "0", color: "white" }}
                 onChange={handleChange}
                 value={note}
+                onKeyDown={handleKeyPress}
             />
         </div>
     )
