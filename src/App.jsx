@@ -1,54 +1,53 @@
-import { useState ,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import "./App.css"
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import InputArea from './components/InputArea';
 import ToDoItem from './components/ToDoItem'
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import { Box } from '@mui/material';
-// import dImg from "../public/bg-desktop-dark.jpg"
-// import lImg from "../src/assets/images/bg-desktop-light.jpg"
+import { Box, Card } from '@mui/material';
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+// import { DndContext, closestCenter } from "@dnd-kit/core";
+// import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 function App() {
-  const[items,setItems] = useState([])
+  const [items, setItems] = useState(["item 1", "item 2", "item 3", "item 4"])
   const [isChecked, setChecked] = useState(false)
-  const [isLight,setLight] = useState(false)
-  
+  const [isLight, setLight] = useState(false)
+
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
     setLight(!isLight);
   };
 
-  const [containerHeight, setContainerHeight] = useState(0);
+  const handleDrag = (result) => {
+    const { destination, source } = result;
 
-  useEffect(() => {
-    const handleResize = () => {
-      const windowHeight = window.innerHeight;
-      setContainerHeight(windowHeight);
-    };
+    // If dropped outside a valid drop target, do nothing
+    if (!destination) {
+      return;
+    }
 
-    handleResize(); // Set initial height
-    window.addEventListener('resize', handleResize);
+    // Perform the reorder of items
+    const updatedItems = [...items];
+    const [draggedItem] = updatedItems.splice(source.index, 1);
+    updatedItems.splice(destination.index, 0, draggedItem);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+    // Update the state with the new order of items
+    setItems(updatedItems);
+  };
+  // }
 
-  // const dImg = 'url("./src/assets/images/bg-desktop-dark.jpg")'
-  // const lImg = 'url("./src/assets/images/bg-desktop-light.jpg")'
-
-  function addNote(note){
+  function addNote(note) {
     setItems((prevItems) => {
       return [...prevItems, note];
     });
   }
 
-  function deleteNote(id){
+  function deleteNote(id) {
     setItems((prevItems) => {
       return prevItems.filter((item, index) => {
         return index !== id;
@@ -57,48 +56,63 @@ function App() {
   }
 
   return (
-      <Grid container justifyContent="center" alignItems="center" direction="column" spacing={2} height="auto"
-      sx={{ minHeight: `${containerHeight}px`,overflow:"hidden"}}>
-        <div className="bg1" style={{backgroundImage:isLight ? 'url(images/bg-desktop-light.jpg)' : 'url(images/bg-desktop-dark.jpg)'}}></div>
-        <div className="bg2" style={{backgroundColor:isChecked ? "aliceblue" : "#161A30"}}>
-        </div>
-        <Grid item xs={12} sm={8} md={6} lg={4}>
+    <>
+      <Grid container justifyContent="center" alignItems="center" height="100vh" direction="column" spacing={1}>
+        <div className="bg1" style={{ backgroundImage: isLight ? 'url(images/bg-desktop-light.jpg)' : 'url(images/bg-desktop-dark.jpg)' }}></div>
+        <div className="bg2" style={{ backgroundColor: isChecked ? "aliceblue" : "#161A30" }}></div>
+
+        <Grid item>
           <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography sx={{color:isChecked ? "#444444" : "aliceblue",fontWeight:"700",fontSize:["1em","1.5em"],letterSpacing:"0.4em"}}>TODO</Typography>
-              <Checkbox 
-                icon={<LightModeOutlinedIcon color='secondary' />} 
-                checkedIcon={<DarkModeOutlinedIcon color='secondary' fontWeight="900" />} 
-                onChange={handleCheckboxChange}
-              />
+            <Typography sx={{ color: isChecked ? "#444444" : "aliceblue", fontWeight: "700", fontSize: ["1em", "1.5em"], letterSpacing: "0.4em" }}>
+              TODO
+            </Typography>
+            <Checkbox
+              icon={<LightModeOutlinedIcon color='secondary' />}
+              checkedIcon={<DarkModeOutlinedIcon color='secondary' fontWeight="900" />}
+              onChange={handleCheckboxChange}
+            />
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={8} md={6} lg={4}>
+        <Grid item>
           <Paper elevation={24}>
             <InputArea
               add={addNote}
-              bg = {isChecked ? "ivory" : "#444444"}
+              bg={isChecked ? "ivory" : "#444444"}
               check={isChecked}
             />
           </Paper>
         </Grid>
 
-        <Grid item xs={12} sm={8} md={6} lg={4} sx={{flexShrink:"1"}}>
-          <Paper elevation={24} sx={{overflow:"hidden"}}>
-            <div>
-              {items.map((todoitem,index)=>(
-                <ToDoItem
-                  key={index}
-                  id={index}
-                  text={todoitem}
-                  delete={deleteNote}
-                  check={isChecked}
-                />
-                ))}
-            </div>
-          </Paper>
+        <Grid item>
+          <DragDropContext onDragEnd={handleDrag}>
+            <Droppable droppableId='todos'>
+              {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {items.map((todoitem, index) => (
+                    <Draggable key={index} draggableId={index} index={index}>
+                      {(provided) => (
+                        <ToDoItem
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          key={index}
+                          id={index}
+                          text={todoitem}
+                          delete={deleteNote}
+                          check={isChecked}
+                        />
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </Grid>
       </Grid>
+    </>
   )
 }
 
