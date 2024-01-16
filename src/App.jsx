@@ -100,6 +100,7 @@ function App() {
           </Paper>
         </Grid>
       </Grid>
+    </>
   )
 }
 
