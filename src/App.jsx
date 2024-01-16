@@ -8,13 +8,12 @@ import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import { Box, Card } from '@mui/material';
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-// import { DndContext, closestCenter } from "@dnd-kit/core";
-// import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { Box } from '@mui/material';
+// import dImg from "../public/bg-desktop-dark.jpg"
+// import lImg from "../src/assets/images/bg-desktop-light.jpg"
 
 function App() {
-  const [items, setItems] = useState(["item 1", "item 2", "item 3", "item 4"])
+  const[items,setItems] = useState([])
   const [isChecked, setChecked] = useState(false)
   const [isLight, setLight] = useState(false)
 
@@ -23,25 +22,26 @@ function App() {
     setLight(!isLight);
   };
 
-  const handleDrag = (result) => {
-    const { destination, source } = result;
+  const [containerHeight, setContainerHeight] = useState(0);
 
-    // If dropped outside a valid drop target, do nothing
-    if (!destination) {
-      return;
-    }
+  useEffect(() => {
+    const handleResize = () => {
+      const windowHeight = window.innerHeight;
+      setContainerHeight(windowHeight);
+    };
 
-    // Perform the reorder of items
-    const updatedItems = [...items];
-    const [draggedItem] = updatedItems.splice(source.index, 1);
-    updatedItems.splice(destination.index, 0, draggedItem);
+    handleResize(); // Set initial height
+    window.addEventListener('resize', handleResize);
 
-    // Update the state with the new order of items
-    setItems(updatedItems);
-  };
-  // }
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-  function addNote(note) {
+  // const dImg = 'url("./src/assets/images/bg-desktop-dark.jpg")'
+  // const lImg = 'url("./src/assets/images/bg-desktop-light.jpg")'
+
+  function addNote(note){
     setItems((prevItems) => {
       return [...prevItems, note];
     });
@@ -84,35 +84,22 @@ function App() {
           </Paper>
         </Grid>
 
-        <Grid item>
-          <DragDropContext onDragEnd={handleDrag}>
-            <Droppable droppableId='todos'>
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {items.map((todoitem, index) => (
-                    <Draggable key={index} draggableId={index} index={index}>
-                      {(provided) => (
-                        <ToDoItem
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          key={index}
-                          id={index}
-                          text={todoitem}
-                          delete={deleteNote}
-                          check={isChecked}
-                        />
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+        <Grid item xs={12} sm={8} md={6} lg={4} sx={{flexShrink:"1"}}>
+          <Paper elevation={24} sx={{overflow:"hidden"}}>
+            <div>
+              {items.map((todoitem,index)=>(
+                <ToDoItem
+                  key={index}
+                  id={index}
+                  text={todoitem}
+                  delete={deleteNote}
+                  check={isChecked}
+                />
+                ))}
+            </div>
+          </Paper>
         </Grid>
       </Grid>
-    </>
   )
 }
 
