@@ -8,12 +8,10 @@ import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import { Box } from '@mui/material';
-// import dImg from "../public/bg-desktop-dark.jpg"
-// import lImg from "../src/assets/images/bg-desktop-light.jpg"
+import { Box, Card } from '@mui/material';
 
 function App() {
-  const[items,setItems] = useState([])
+  const [items, setItems] = useState([])
   const [isChecked, setChecked] = useState(false)
   const [isLight, setLight] = useState(false)
 
@@ -22,26 +20,7 @@ function App() {
     setLight(!isLight);
   };
 
-  const [containerHeight, setContainerHeight] = useState(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const windowHeight = window.innerHeight;
-      setContainerHeight(windowHeight);
-    };
-
-    handleResize(); // Set initial height
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  // const dImg = 'url("./src/assets/images/bg-desktop-dark.jpg")'
-  // const lImg = 'url("./src/assets/images/bg-desktop-light.jpg")'
-
-  function addNote(note){
+  function addNote(note) {
     setItems((prevItems) => {
       return [...prevItems, note];
     });
@@ -54,6 +33,24 @@ function App() {
       });
     });
   }
+
+  // useEffect(() => {
+  //   const string = localStorage.getItem("key");
+  //   const arrRetrieval = JSON.parse(string);
+
+  //   setItems(arrRetrieval);
+  // },[]);
+
+  // useEffect(() => {
+  //   const string = JSON.stringify(items);
+  //   localStorage.setItem("key",string);
+  // },[items]);
+
+  // var string = JSON.stringify(items)
+  // localStorage.setItem("key",string)
+  // var strRetrieval = localStorage.getItem("key")
+  // var arrRetrieval = JSON.parse(strRetrieval)
+  // var newItems = [...arrRetrieval]
 
   return (
     <>
@@ -84,20 +81,15 @@ function App() {
           </Paper>
         </Grid>
 
-        <Grid item xs={12} sm={8} md={6} lg={4} sx={{flexShrink:"1"}}>
-          <Paper elevation={24} sx={{overflow:"hidden"}}>
-            <div>
-              {items.map((todoitem,index)=>(
-                <ToDoItem
-                  key={index}
-                  id={index}
-                  text={todoitem}
-                  delete={deleteNote}
-                  check={isChecked}
-                />
-                ))}
-            </div>
-          </Paper>
+        <Grid item>
+          {items.map((todoitem, index) => (
+            <ToDoItem
+              key={index}
+              id={index}
+              text={todoitem}
+              delete={deleteNote}
+            />
+          ))}
         </Grid>
       </Grid>
     </>

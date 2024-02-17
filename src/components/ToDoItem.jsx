@@ -6,16 +6,16 @@ import { Grid, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const ToDoItem = (props) => {
-    const [isChecked, setChecked] = useState(false);
+    const [isCompleted, setIsCompleted] = useState(false);
 
     const handleCheckboxChange = () => {
-      setChecked(!isChecked);
-    };  
+      setIsCompleted(!isCompleted);
+    };
 
     return (
         <Grid container justifyContent="space-between" alignItems="center" direction="row"
         style={{
-            textDecoration: isChecked ? "line-through" : "none",
+            textDecoration: isCompleted ? "line-through" : "none",
             color: props.check ? "#444444" : "ivory",
             backgroundColor: props.check ? "ivory" : "#444444",
             textTransform: "uppercase",
@@ -39,6 +39,7 @@ const ToDoItem = (props) => {
             <Grid item>
                 <IconButton color='secondary' size='large' onClick={() => {
                     props.delete(props.id)
+                    setIsCompleted(false)
                 }}>
                     <CloseIcon />
                 </IconButton>
