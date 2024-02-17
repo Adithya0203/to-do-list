@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .app{
@@ -11,12 +11,11 @@ body {
 }
 
 .bg1{
-    /* background-image: url("./assets/images/bg-desktop-dark.jpg"); */
     position: absolute;
     top: 0%;
     left: 0;
     width: 100%;
-    height: 40%;
+    height: 40dvh;
     background-size: cover;
     z-index: -1;
     background-position: top;
@@ -27,29 +26,11 @@ body {
     top: 40%;
     left: 0;
     width: 100%;
-    height: 60%;
+    height: 60dvh;
     z-index: -1;
 }
 
-/* .note{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #444444;
-    width: 17em;
-    padding: 0.2em 0;
-    color: ivory;
-}
-
-.heading{
-    display: flex;
-    align-items:stretch;
-    justify-content: space-between;
-    width: 17em;
-    margin: 1em 0;
-} */
-
-@media(max-width:768px){
+/* @media(max-width:768px){
     .note{
         width: 18.5em;
         padding: 0.4em 0;
@@ -58,4 +39,4 @@ body {
     .heading{
         width: 18.5em;
     }
-}
+} */
